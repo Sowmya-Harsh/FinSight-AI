@@ -3,7 +3,7 @@
 An AI-powered financial intelligence platform with four modules: forecasting & anomaly detection, annual report analysis, credit risk scoring, and portfolio optimisation.
 
 ## Live Demo
-👉 [Try it on Streamlit Cloud](#) *(add your link after deployment)*
+👉 [Try it on Streamlit Cloud](#) *https://finsight-ai-3.streamlit.app/*
 
 ## Modules
 
