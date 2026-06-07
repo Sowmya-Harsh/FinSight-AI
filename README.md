@@ -1,4 +1,4 @@
-# 💹 FinSight AI — Financial Intelligence Platform
+# 💹 FinSight AI - Financial Intelligence Platform
 
 An AI-powered financial intelligence platform with four modules: forecasting & anomaly detection, annual report analysis, credit risk scoring, and portfolio optimisation.
 
