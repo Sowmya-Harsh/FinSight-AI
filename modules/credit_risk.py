@@ -43,7 +43,7 @@ Return ONLY this JSON, no other text:
 
 
 def render():
-    st.markdown("## 🏦 Credit Risk Scorer")
+    st.markdown("##  Credit Risk Scorer")
     st.markdown("Input company financials to get an AI-powered credit risk assessment, rating, and lending recommendation.")
 
     st.markdown("### Company Information")
@@ -138,7 +138,7 @@ def render():
 
         st.divider()
 
-        # ── Credit score gauge ───────────────────────────────────────────────
+        #  Credit score gauge 
         score = result.get("credit_score", 500)
         risk_level = result.get("risk_level", "Moderate")
         rating = result.get("rating", "BBB")
@@ -154,10 +154,10 @@ def render():
 
         # recommendation banner
         st.markdown(f"""
-        <div style="text-align:center; padding:20px; background:{rec_color}15;
+        <div style="text-align:center; padding:20px; background:transparent;
              border: 2px solid {rec_color}; border-radius:12px; margin-bottom:20px">
-            <h1 style="color:{rec_color}; margin:0">📋 {recommendation}</h1>
-            <p style="color:#666; margin:4px 0">Credit Decision for {company_name}</p>
+            <h1 style="color:{rec_color}; margin:0"> {recommendation}</h1>
+            <p style="color:inherit; opacity:0.7; margin:4px 0">Credit Decision for {company_name}</p>
         </div>""", unsafe_allow_html=True)
 
         col1, col2 = st.columns([1, 1])
@@ -182,7 +182,7 @@ def render():
                     }
                 }
             ))
-            fig.update_layout(height=280, margin=dict(t=40, b=0), paper_bgcolor="white")
+            fig.update_layout(height=280, margin=dict(t=40, b=0), paper_bgcolor="rgba(0,0,0,0)")
             st.plotly_chart(fig, use_container_width=True)
 
         with col2:
@@ -196,27 +196,27 @@ def render():
 
         st.divider()
 
-        # ── Assessment ───────────────────────────────────────────────────────
-        st.markdown("### 📝 Overall Assessment")
+        #  Assessment 
+        st.markdown("###  Overall Assessment")
         st.markdown(result.get("overall_assessment", ""))
 
-        # ── Factors ─────────────────────────────────────────────────────────
+        #  Factors 
         col1, col2 = st.columns(2)
         with col1:
-            st.markdown("**✅ Positive Factors**")
+            st.markdown("** Positive Factors**")
             for f in result.get("positive_factors", []):
                 st.markdown(f"""<div style="background:#e8f5e9; border-left:4px solid #4caf50;
                     padding:8px 12px; border-radius:6px; margin:4px 0">{f}</div>""",
                     unsafe_allow_html=True)
         with col2:
-            st.markdown("**⚠️ Risk Factors**")
+            st.markdown("** Risk Factors**")
             for f in result.get("risk_factors", []):
                 st.markdown(f"""<div style="background:#fce4ec; border-left:4px solid #e91e63;
                     padding:8px 12px; border-radius:6px; margin:4px 0">{f}</div>""",
                     unsafe_allow_html=True)
 
-        # ── Financial ratio assessment ───────────────────────────────────────
-        st.markdown("### 📊 Financial Ratio Assessment")
+        #  Financial ratio assessment 
+        st.markdown("###  Financial Ratio Assessment")
         ratios = result.get("financial_ratios", {})
         ratio_cols = st.columns(4)
         ratio_items = [
@@ -235,14 +235,14 @@ def render():
                 color = assessment_colors.get(val.lower(), "#9e9e9e")
                 st.markdown(f"""<div style="text-align:center; padding:12px;
                     border:1px solid {color}; border-radius:8px; border-top: 4px solid {color}">
-                    <p style="color:#666; margin:0; font-size:0.85rem">{label}</p>
+                    <p style="color:inherit; opacity:0.7; margin:0; font-size:0.85rem">{label}</p>
                     <h4 style="color:{color}; margin:4px 0; text-transform:capitalize">{val}</h4>
                     </div>""", unsafe_allow_html=True)
 
-        # ── Conditions ───────────────────────────────────────────────────────
+        #  Conditions 
         conditions = result.get("conditions", [])
         if conditions and conditions[0]:
-            st.markdown("### 📋 Conditions / Requirements")
+            st.markdown("###  Conditions / Requirements")
             for c in conditions:
                 st.markdown(f"- {c}")
 
