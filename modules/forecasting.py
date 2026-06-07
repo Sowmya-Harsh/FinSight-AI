@@ -27,7 +27,7 @@ def simple_forecast(series: pd.Series, periods: int = 30) -> pd.Series:
 
 
 def render():
-    st.markdown("## 📈 Financial Forecasting & Anomaly Detection")
+    st.markdown("##  Financial Forecasting & Anomaly Detection")
     st.markdown("Upload any financial time series data to get forecasts and automatic anomaly alerts.")
 
     st.markdown("### Upload your data")
@@ -82,8 +82,8 @@ def render():
             last_date = df[date_col].iloc[-1]
             future_dates = pd.date_range(start=last_date, periods=forecast_days + 1, freq="D")[1:]
 
-            # ── Main chart ──────────────────────────────────────────────────
-            st.markdown("### 📊 Time Series with Forecast & Anomalies")
+            #  Main chart 
+            st.markdown("###  Time Series with Forecast & Anomalies")
             fig = go.Figure()
 
             # historical
@@ -120,15 +120,15 @@ def render():
             ))
 
             fig.update_layout(
-                height=450, paper_bgcolor="white", plot_bgcolor="white",
+                height=450, paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
                 xaxis_title="Date", yaxis_title=value_col,
                 legend=dict(orientation="h", yanchor="bottom", y=1.02),
                 hovermode="x unified"
             )
             st.plotly_chart(fig, use_container_width=True)
 
-            # ── Stats ───────────────────────────────────────────────────────
-            st.markdown("### 📋 Summary Statistics")
+            #  Stats 
+            st.markdown("###  Summary Statistics")
             c1, c2, c3, c4, c5 = st.columns(5)
             c1.metric("Current Value", f"{series.iloc[-1]:,.0f}")
             c2.metric("Mean", f"{series.mean():,.0f}")
@@ -137,17 +137,17 @@ def render():
             c5.metric("Forecast (next period)", f"{forecast.iloc[0]:,.0f}",
                       delta=f"{forecast.iloc[0] - series.iloc[-1]:+,.0f}")
 
-            # ── Anomaly table ───────────────────────────────────────────────
+            #  Anomaly table 
             if anomalies.sum() > 0:
-                st.markdown("### 🚨 Detected Anomalies")
+                st.markdown("###  Detected Anomalies")
                 anomaly_df = df[anomalies][[date_col, value_col]].copy()
                 anomaly_df["Deviation from Mean"] = (
                     (series[anomalies] - series.mean()) / series.mean() * 100
                 ).round(2).astype(str) + "%"
                 st.dataframe(anomaly_df, use_container_width=True)
 
-            # ── AI insights ─────────────────────────────────────────────────
-            st.markdown("### 🤖 AI Insights")
+            #  AI insights 
+            st.markdown("###  AI Insights")
             with st.spinner("Generating AI insights..."):
                 client = get_client()
                 summary_stats = f"""
