@@ -81,7 +81,7 @@ Provide 4-5 bullet points covering: allocation rationale, risk-return profile, d
 
 
 def render():
-    st.markdown("## 💼 Portfolio Optimiser")
+    st.markdown("##  Portfolio Optimiser")
     st.markdown("Enter your assets and investment amount to get an AI-optimised portfolio allocation with risk-return analysis.")
 
     # inputs
@@ -129,8 +129,8 @@ def render():
 
         st.divider()
 
-        # ── Key metrics ──────────────────────────────────────────────────────
-        st.markdown("### 📊 Optimised Portfolio Metrics")
+        #  Key metrics 
+        st.markdown("###  Optimised Portfolio Metrics")
         c1, c2, c3, c4 = st.columns(4)
         c1.metric("Expected Annual Return", f"{result['expected_return']}%")
         c2.metric("Annual Volatility", f"{result['volatility']}%")
@@ -139,8 +139,8 @@ def render():
 
         st.divider()
 
-        # ── Allocation charts ────────────────────────────────────────────────
-        st.markdown("### 🥧 Optimal Allocation")
+        #  Allocation charts 
+        st.markdown("###  Optimal Allocation")
         weights = result["weights"]
         col1, col2 = st.columns(2)
 
@@ -154,7 +154,7 @@ def render():
             ))
             fig_pie.update_layout(
                 title="Portfolio Allocation",
-                height=400, paper_bgcolor="white",
+                height=400, paper_bgcolor="rgba(0,0,0,0)",
                 showlegend=False
             )
             st.plotly_chart(fig_pie, use_container_width=True)
@@ -171,15 +171,15 @@ def render():
             ))
             fig_bar.update_layout(
                 title=f"Dollar Allocation ({currency})",
-                height=400, paper_bgcolor="white",
-                plot_bgcolor="white",
+                height=400, paper_bgcolor="rgba(0,0,0,0)",
+                plot_bgcolor="rgba(0,0,0,0)",
                 yaxis_title=f"Amount ({currency})",
                 xaxis_tickangle=-30
             )
             st.plotly_chart(fig_bar, use_container_width=True)
 
-        # ── Allocation table ─────────────────────────────────────────────────
-        st.markdown("### 📋 Allocation Details")
+        #  Allocation table 
+        st.markdown("###  Allocation Details")
         alloc_df = pd.DataFrame({
             "Asset": list(weights.keys()),
             "Weight (%)": list(weights.values()),
@@ -187,8 +187,8 @@ def render():
         }).sort_values("Weight (%)", ascending=False)
         st.dataframe(alloc_df, use_container_width=True, hide_index=True)
 
-        # ── Efficient frontier ───────────────────────────────────────────────
-        st.markdown("### 📈 Efficient Frontier")
+        #  Efficient frontier 
+        st.markdown("###  Efficient Frontier")
         vols = result["all_vols"]
         rets = result["all_returns"]
         sharpes = result["all_sharpes"]
@@ -217,12 +217,12 @@ def render():
             title="Efficient Frontier — 5,000 Simulated Portfolios",
             xaxis_title="Volatility (%)",
             yaxis_title="Expected Return (%)",
-            height=450, paper_bgcolor="white", plot_bgcolor="white"
+            height=450, paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)"
         )
         st.plotly_chart(fig_ef, use_container_width=True)
 
-        # ── AI commentary ────────────────────────────────────────────────────
-        st.markdown("### 🤖 Portfolio Manager Commentary")
+        #  AI commentary 
+        st.markdown("###  Portfolio Manager Commentary")
         st.markdown(commentary)
 
         st.caption("Disclaimer: For informational purposes only. Not financial advice. Past performance does not guarantee future results.")
