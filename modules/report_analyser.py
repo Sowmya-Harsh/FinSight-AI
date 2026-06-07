@@ -78,7 +78,7 @@ def signal_color(signal: str) -> str:
 
 
 def render():
-    st.markdown("## 📄 Annual Report Analyser")
+    st.markdown("##  Annual Report Analyser")
     st.markdown("Upload any company annual report and get instant KPIs, investment signals, risk assessment, and analyst recommendations.")
 
     uploaded = st.file_uploader("Upload Annual Report (PDF)", type=["pdf"])
@@ -103,17 +103,17 @@ def render():
 
         st.divider()
 
-        # ── Investment signal ────────────────────────────────────────────────
+        #  Investment signal 
         signal = result.get("investment_signal", "Hold")
         sig_color = signal_color(signal)
         st.markdown(f"""
-        <div style="text-align:center; padding:20px; background:{sig_color}15;
+        <div style="text-align:center; padding:20px; background:transparent;
              border: 2px solid {sig_color}; border-radius:12px; margin-bottom:20px">
-            <h1 style="color:{sig_color}; margin:0">⚡ {signal}</h1>
-            <p style="color:#666; margin:4px 0">Investment Signal for {company_name}</p>
+            <h1 style="color:{sig_color}; margin:0"> {signal}</h1>
+            <p style="color:inherit; opacity:0.7; margin:4px 0">Investment Signal for {company_name}</p>
         </div>""", unsafe_allow_html=True)
 
-        # ── Score cards ──────────────────────────────────────────────────────
+        #  Score cards 
         st.markdown("### Scores")
         c1, c2, c3 = st.columns(3)
         scores = [
@@ -138,11 +138,11 @@ def render():
                     }
                 ))
                 fig.update_layout(height=220, margin=dict(t=40, b=0, l=20, r=20),
-                                  paper_bgcolor="white")
+                                  paper_bgcolor="rgba(0,0,0,0)")
                 st.plotly_chart(fig, use_container_width=True)
 
-        # ── KPIs ─────────────────────────────────────────────────────────────
-        st.markdown("### 📊 Key Performance Indicators")
+        #  KPIs 
+        st.markdown("###  Key Performance Indicators")
         kpis = result.get("kpis", {})
         kpi_cols = st.columns(4)
         kpi_items = list(kpis.items())
@@ -153,36 +153,36 @@ def render():
 
         st.divider()
 
-        # ── Summary ──────────────────────────────────────────────────────────
-        st.markdown("### 📝 Executive Summary")
+        #  Summary 
+        st.markdown("###  Executive Summary")
         st.markdown(result.get("executive_summary", ""))
 
-        # ── Strengths, Risks, Opportunities ─────────────────────────────────
+        #  Strengths, Risks, Opportunities 
         st.markdown("### Analysis")
         col1, col2, col3 = st.columns(3)
         with col1:
-            st.markdown("**✅ Key Strengths**")
+            st.markdown("** Key Strengths**")
             for s in result.get("key_strengths", []):
                 st.markdown(f"""<div style="background:#e8f5e9; border-left:4px solid #4caf50;
                     padding:8px 12px; border-radius:6px; margin:4px 0">{s}</div>""",
                     unsafe_allow_html=True)
         with col2:
-            st.markdown("**⚠️ Key Risks**")
+            st.markdown("** Key Risks**")
             for r in result.get("key_risks", []):
                 st.markdown(f"""<div style="background:#fce4ec; border-left:4px solid #e91e63;
                     padding:8px 12px; border-radius:6px; margin:4px 0">{r}</div>""",
                     unsafe_allow_html=True)
         with col3:
-            st.markdown("**🚀 Opportunities**")
+            st.markdown("** Opportunities**")
             for o in result.get("opportunities", []):
                 st.markdown(f"""<div style="background:#e3f2fd; border-left:4px solid #2196f3;
                     padding:8px 12px; border-radius:6px; margin:4px 0">{o}</div>""",
                     unsafe_allow_html=True)
 
-        # ── Segment performance ──────────────────────────────────────────────
+        #  Segment performance 
         segments = result.get("segment_performance", [])
         if segments:
-            st.markdown("### 🏢 Segment Performance")
+            st.markdown("###  Segment Performance")
             perf_colors = {"positive": "#4caf50", "neutral": "#ff9800", "negative": "#f44336"}
             for seg in segments:
                 color = perf_colors.get(seg.get("performance", "neutral"), "#9e9e9e")
@@ -191,8 +191,8 @@ def render():
                     <strong>{seg.get('segment', '')}</strong> — {seg.get('notes', '')}
                     </div>""", unsafe_allow_html=True)
 
-        # ── Recommendation ───────────────────────────────────────────────────
-        st.markdown("### 💡 Analyst Recommendation")
+        #  Recommendation 
+        st.markdown("###  Analyst Recommendation")
         st.info(result.get("analyst_recommendation", ""))
 
         st.caption("Disclaimer: This is AI-generated analysis for informational purposes only. Not financial advice.")
