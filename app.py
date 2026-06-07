@@ -1,12 +1,12 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="FinSight-AI",
-    page_icon="💹",
+    page_title="FinSight AI",
+    page_icon="chart_with_upwards_trend",
     layout="wide"
 )
 
-# ── Styles ────────────────────────────────────────────────────────────────────
+# ── Styles — works in both light and dark mode ────────────────────────────────
 st.markdown("""
 <style>
     .main-title {
@@ -19,42 +19,67 @@ st.markdown("""
     }
     .main-subtitle {
         font-size: 1.05rem;
-        color: #546e7a;
+        color: var(--text-color);
+        opacity: 0.7;
         margin-bottom: 2rem;
     }
     .module-card {
-        background: white;
-        border: 1px solid #e0e0e0;
+        background: transparent;
+        border: 1px solid rgba(128,128,128,0.3);
         border-radius: 12px;
-        padding: 20px;
+        padding: 24px 20px;
         text-align: center;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         transition: all 0.2s;
-        cursor: pointer;
         height: 160px;
+    }
+    .module-card:hover {
+        border-color: #1565c0;
+        box-shadow: 0 4px 16px rgba(21,101,192,0.15);
+    }
+    .module-card h4 {
+        color: var(--text-color);
+        margin: 8px 0 6px 0;
+        font-size: 1rem;
+    }
+    .module-card p {
+        color: var(--text-color);
+        opacity: 0.6;
+        font-size: 0.88rem;
+        margin: 0;
+    }
+    .module-icon {
+        font-size: 1.6rem;
+        margin-bottom: 4px;
+    }
+    .who-card {
+        border: 1px solid rgba(128,128,128,0.25);
+        border-radius: 10px;
+        padding: 16px;
+        height: 100%;
     }
     .footer {
         text-align: center;
-        color: #9e9e9e;
+        opacity: 0.5;
         font-size: 0.85rem;
         margin-top: 3rem;
         padding-top: 1rem;
-        border-top: 1px solid #e0e0e0;
+        border-top: 1px solid rgba(128,128,128,0.2);
     }
+    .footer a { color: #1565c0; text-decoration: none; }
 </style>
 """, unsafe_allow_html=True)
 
 # ── Header ────────────────────────────────────────────────────────────────────
-st.markdown('<div class="main-title">💹 FinSight AI</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">FinSight AI</div>', unsafe_allow_html=True)
 st.markdown('<div class="main-subtitle">A financial intelligence platform for forecasting, risk assessment, credit scoring, and portfolio optimisation — powered by AI.</div>', unsafe_allow_html=True)
 
 # ── Navigation ────────────────────────────────────────────────────────────────
 MODULES = {
-    "🏠 Home": "home",
-    "📈 Forecasting & Anomaly Detection": "forecasting",
-    "📄 Annual Report Analyser": "report",
-    "🏦 Credit Risk Scorer": "credit",
-    "💼 Portfolio Optimiser": "portfolio",
+    "Home": "home",
+    "Forecasting & Anomaly Detection": "forecasting",
+    "Annual Report Analyser": "report",
+    "Credit Risk Scorer": "credit",
+    "Portfolio Optimiser": "portfolio",
 }
 
 selected = st.sidebar.radio(
@@ -73,31 +98,31 @@ if module == "home":
     with col1:
         st.markdown("""
         <div class="module-card">
-            <h2>📈</h2>
+            <div class="module-icon">&#x1F4C8;</div>
             <h4>Forecasting & Anomaly Detection</h4>
-            <p style="color:#666; font-size:0.9rem">Upload any financial time series — get forecasts and automatic anomaly alerts</p>
+            <p>Upload any financial time series — get forecasts and automatic anomaly alerts</p>
         </div>""", unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("""
         <div class="module-card">
-            <h2>🏦</h2>
+            <div class="module-icon">&#x1F3E6;</div>
             <h4>Credit Risk Scorer</h4>
-            <p style="color:#666; font-size:0.9rem">Input company financials and get a credit risk score, rating, and lending recommendation</p>
+            <p>Input company financials and get a credit risk score, rating, and lending recommendation</p>
         </div>""", unsafe_allow_html=True)
 
     with col2:
         st.markdown("""
         <div class="module-card">
-            <h2>📄</h2>
+            <div class="module-icon">&#x1F4C4;</div>
             <h4>Annual Report Analyser</h4>
-            <p style="color:#666; font-size:0.9rem">Upload any annual report PDF and get KPIs, investment signals, and analyst recommendations</p>
+            <p>Upload any annual report PDF and get KPIs, investment signals, and analyst recommendations</p>
         </div>""", unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("""
         <div class="module-card">
-            <h2>💼</h2>
+            <div class="module-icon">&#x1F4BC;</div>
             <h4>Portfolio Optimiser</h4>
-            <p style="color:#666; font-size:0.9rem">Enter your assets and get an AI-optimised allocation with efficient frontier analysis</p>
+            <p>Enter your assets and get an AI-optimised allocation with efficient frontier analysis</p>
         </div>""", unsafe_allow_html=True)
 
     st.markdown("---")
@@ -105,24 +130,27 @@ if module == "home":
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("""
-        **🏦 Banks & Lenders**
-        Credit risk assessment, loan scoring, and financial health monitoring
-        """)
+        <div class="who-card">
+            <strong>Banks & Lenders</strong><br><br>
+            Credit risk assessment, loan scoring, and financial health monitoring
+        </div>""", unsafe_allow_html=True)
     with col2:
         st.markdown("""
-        **📊 Investment Firms**
-        Portfolio optimisation, annual report analysis, and market forecasting
-        """)
+        <div class="who-card">
+            <strong>Investment Firms</strong><br><br>
+            Portfolio optimisation, annual report analysis, and market forecasting
+        </div>""", unsafe_allow_html=True)
     with col3:
         st.markdown("""
-        **🏢 Finance Teams**
-        Anomaly detection in financial data, forecasting, and risk monitoring
-        """)
+        <div class="who-card">
+            <strong>Finance Teams</strong><br><br>
+            Anomaly detection in financial data, forecasting, and risk monitoring
+        </div>""", unsafe_allow_html=True)
 
     st.markdown("""
     <div class="footer">
-        Built by <strong>Sowmya Janmahanthi</strong> ·
-        <a href="https://linkedin.com/in/sowmyajanmahanthi">LinkedIn</a> ·
+        Built by <strong>Sowmya Janmahanthi</strong> &nbsp;·&nbsp;
+        <a href="https://linkedin.com/in/sowmyajanmahanthi">LinkedIn</a> &nbsp;·&nbsp;
         <a href="https://github.com/Sowmya-Harsh">GitHub</a>
     </div>
     """, unsafe_allow_html=True)
