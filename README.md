@@ -41,6 +41,13 @@ An AI-powered financial intelligence platform with four modules: forecasting & a
 - **Charts:** Plotly
 - **PDF parsing:** PyPDF
 
+## How it works:
+
+- Forecasting: Rolling window Z-score for anomaly detection + polynomial regression for trend forecasting with 95% confidence intervals
+- Report Analyser: PyPDF extracts text from annual report PDFs → chunked and sent to LLaMA 3.3 via Groq API → structured JSON response with KPIs, scores, signals
+- Credit Risk: Rule-based financial ratio computation (debt/equity, current ratio, DSCR) + LLM reasoning layer for qualitative assessment and rating
+- Portfolio: Monte Carlo simulation (5,000 portfolios) with mean-variance optimisation → efficient frontier → optimal allocation based on Sharpe ratio
+
 ## Run Locally
 
 ```bash
